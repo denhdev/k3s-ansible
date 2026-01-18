@@ -3,10 +3,14 @@ k3s_cluster:
   children:
     server:
       hosts:
-        hostname: address
+        <HOSTNAME-0>:
+          ansible_host: 10.0.0.xxx
     agent:
       hosts:
-        hostname: address
+        <HOSTNAME-1>:
+          ansible_host: 10.0.0.xxx
+        <HOSTNAME-2>:
+          ansible_host: 10.0.0.xxx
 
   # Required Vars
   vars:

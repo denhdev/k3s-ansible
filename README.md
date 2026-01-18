@@ -23,7 +23,7 @@ ansible-playbook -K playbooks/reset.yml -i inventory.yml
 Run playbook for upgrading `k3s`
 
 ```bash
-ansible-playbook playbooks/upgrade.yml -i inventory.yml
+ansible-playbook -K playbooks/upgrade.yml -i inventory.yml
 ```
 
 Easily bring up a cluster on machines running:
@@ -94,10 +94,14 @@ k3s_cluster:
   children:
     server:
       hosts:
-        hostname: address
+        <HOSTNAME>:
+          ansible_host: 10.0.0.xxx
     agent:
       hosts:
-        hostname: address
+        <HOSTNAME>:
+          ansible_host: 10.0.0.xxx
+        <HOSTNAME>:
+          ansible_host: 10.0.0.xxx
 ```
 
 If needed, you can also edit `vars` section at the bottom to match your environment.
@@ -126,15 +130,6 @@ ansible-playbook -K playbooks/site.yml -i inventory.yml
 If an external database is preferred, this can be achieved by passing the `--datastore-endpoint` as an extra server argument as well as setting the `use_external_database` flag to true.
 
 ```bash
-k3s_cluster:
-  children:
-    server:
-      hosts:
-        hostname1: address1
-    agent:
-      hosts:
-        hostname2: address2
-
   vars:
     use_external_database: true
     extra_server_args: "--datastore-endpoint=postgres://username:password@hostname:port/database-name"
@@ -157,7 +152,7 @@ ansible-playbook k3s.orchestration.upgrade -i inventory.yml
 *Running the playbook from inside the repository*
 
 ```bash
-ansible-playbook playbooks/upgrade.yml -i inventory.yml
+ansible-playbook -K playbooks/upgrade.yml -i inventory.yml
 ```
 
 ## Airgap Install
