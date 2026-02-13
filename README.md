@@ -113,13 +113,13 @@ Setting up a loadbalancer or VIP beforehand to use as the API endpoint is possib
 
 Start provisioning of the cluster using one of the following commands. The command to be used depends on whether you installed `k3s-ansible` with `ansible-galaxy` or if you run the playbook from within the cloned git repository:
 
-*Installed with ansible-galaxy*
+### Installed with ansible-galaxy
 
 ```bash
 ansible-playbook k3s.orchestration.site -i inventory.yml
 ```
 
-*Running the playbook from inside the repository*
+### Running the playbook from inside the repository
 
 ```bash
 ansible-playbook -K playbooks/site.yml -i inventory.yml
@@ -143,13 +143,13 @@ The format of the datastore-endpoint parameter is dependent upon the datastore b
 
 A playbook is provided to upgrade K3s on all nodes in the cluster. To use it, update `k3s_version` with the desired version in `inventory.yml` and run one of the following commands. Again, the syntax is slightly different depending on whether you installed `k3s-ansible` with `ansible-galaxy` or if you run the playbook from within the cloned git repository:
 
-*Installed with ansible-galaxy*
+### Installed with ansible-galaxy
 
 ```bash
 ansible-playbook k3s.orchestration.upgrade -i inventory.yml
 ```
 
-*Running the playbook from inside the repository*
+### Running the playbook from inside the repository
 
 ```bash
 ansible-playbook -K playbooks/upgrade.yml -i inventory.yml
@@ -208,13 +208,13 @@ The default username is `admin`. Use the password from the secret to log in to t
 
 A playbook is provided to reset the cluster. To use it, run one of the following commands. Again, the syntax is slightly different depending on whether you installed `k3s-ansible` with `ansible-galaxy` or if you run the playbook from within the cloned git repository:
 
-*Installed with ansible-galaxy*
+### Installed with ansible-galaxy
 
 ```bash
 ansible-playbook k3s.orchestration.reset -i inventory.yml
 ```
 
-*Running the playbook from inside the repository*
+### Running the playbook from inside the repository
 
 ```bash
 ansible-playbook -K playbooks/reset.yml -i inventory.yml
@@ -247,4 +247,3 @@ See these other projects:
 - <https://github.com/jon-stumpf/k3s-ansible>
 - <https://github.com/alexellis/k3sup>
 - <https://github.com/axivo/k3s-cluster>
-
