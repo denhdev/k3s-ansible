@@ -14,16 +14,20 @@
   failed_when: false
   check_mode: false
 
+# Check both the server and the ApplicationSet CRD so a partial install is retried
 - name: Check if ArgoCD is already installed
-  command: kubectl get deployment argocd-server -n argocd
+  command: kubectl get deployment/argocd-server -n argocd crd/applicationsets.argoproj.io
   register: argocd_check
   ignore_errors: true
   changed_when: false
   check_mode: false
 
+# Server-side apply is required: the ApplicationSet CRD exceeds the 256KB
+# last-applied-configuration annotation limit of client-side apply.
 - name: Install ArgoCD if not installed
   command: >
-    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    kubectl apply --server-side --force-conflicts -n argocd
+    -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   when: argocd_check.rc != 0
   register: argocd_install
   retries: 3
