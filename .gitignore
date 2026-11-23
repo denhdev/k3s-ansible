@@ -3,4 +3,5 @@ venv
 .vscode
 .vagrant
 inventory.yml
-playbook/debug.yml
+playbooks/debug.yml
+USAGE.md
