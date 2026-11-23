@@ -16,7 +16,8 @@ k3s_cluster:
   vars:
     ansible_port: 22
     ansible_user: changeme!
-    k3s_version: v1.30.2+k3s1
+    # ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+    k3s_version: v1.37.2+k3s1
     # The token should be a random string of reasonable length. You can generate
     # one with the following commands:
     # - openssl rand -base64 64
@@ -30,8 +31,10 @@ k3s_cluster:
     metallb_ip_range:
       - 10.0.0.240-10.0.0.250
 
+    # Disable k3s's built-in servicelb so it doesn't compete with MetalLB
+    extra_server_args: "--disable servicelb"
+
     # Optional vars
-    # extra_server_args: ""
     # extra_agent_args: ""
     # cluster_context: k3s-ansible
     # api_port: 6443
